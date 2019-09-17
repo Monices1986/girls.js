@@ -16,15 +16,19 @@
 		border: none;
 		cursor: pointer;
 		font-size: 40px;
-		padding: 20px 30px 20px 30px;
+		padding: 5px 30px 5px 30px;
+		width: 200px;
 
 	}
 
 	.Value {
-		padding: 20px 50px 20px 50px;
+		padding: 5px 30px 5px 30px;
 		border: solid 1px;
 		cursor: pointer;
 		margin: 40px 20px;
+		font-size: 50px;
+		text-align: center;
+		width: 150px;
 	}
 
 	.inputs {
@@ -44,17 +48,23 @@
 
 <div class="inputs">
 
-	<input type="number" class="Value">	&#215
-	<input type="number" class="Value"> &#61
-	<input type="number" class="Value" readonly>
+	<input type="number" class="Value" id ="firstValue">	&#215
+	<input type="number" class="Value" id = "secondValue"> &#61
+	<input type="number" class="Value" id= "result" readonly>
 
-	<input type="button" class="button" value="Oblicz">
+	<input type="button" class="button" value="Oblicz" onclick= "result()">
 
 </div>
 
 
 	<script type="text/javascript">
-	
+
+	function result () {
+		let x = document.getElementById("firstValue").value;
+		let y = document.getElementById("secondValue").value;
+		let z = x * y;
+		document.getElementById("result").value = z;
+	}
 
 
 	</script>
