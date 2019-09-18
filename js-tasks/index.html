@@ -11,14 +11,28 @@
 		}
 
 	.button {
-		background-color: lightgrey;
+		background-color: #bfbfbf;
 		text-align: center;
 		border: none;
 		cursor: pointer;
 		font-size: 40px;
 		padding: 5px 30px 5px 30px;
 		width: 200px;
+		border-radius: 15px;
+  		box-shadow: 0 9px #999;
+  		outline: none;
+  		display: inline-block;
+  	}
 
+
+  	.button:hover {background-color: #d9d9d9}
+
+	}
+
+	.button:active {
+  background-color: #a6a6a6;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
 	}
 
 	.Value {
@@ -42,17 +56,17 @@
 
 </HEAD>
 
-<BODY>
+<BODY onload = "random()">
 
 <H1 id="header">Quiz</H1>
 
 <div class="inputs">
 
-	<input type="number" class="Value" id ="firstValue">	&#215
-	<input type="number" class="Value" id = "secondValue"> &#61
+	<input type="number" class="Value" id ="firstValue" readonly>	&#215
+	<input type="number" class="Value" id = "secondValue" readonly> &#61
 	<input type="text" class="Value" id= "result" readonly>
 
-	<input type="button" class="button" value="Oblicz" onclick= "result()">
+	<input type="button" class="button" value="Losuj" onclick= "random()">
 
 </div>
 
@@ -69,6 +83,14 @@
 			document.getElementById("result").value = "?";
 
 		}
+	}
+
+	function random() {
+		let x = document.getElementById("firstValue").value = Math.floor(Math.random() * 11);
+		let y = document.getElementById("secondValue").value = Math.floor(Math.random() * 11);
+		let z = x * y;
+		document.getElementById("result").value = z;
+
 	}
 
 
