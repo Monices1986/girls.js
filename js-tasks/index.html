@@ -8,6 +8,7 @@
 	#header {
 			color: dimgray;
 			text-align: center;
+			font-size: 40px;
 		}
 
 	.button {
@@ -58,7 +59,8 @@
 
 <BODY onload = "random()">
 
-<H1 id="header">Quiz</H1>
+<p id="header">Pytanie: <a id="number">0</a></p>
+
 
 <div class="inputs">
 
@@ -66,7 +68,7 @@
 	<input type="number" class="Value" id = "secondValue" readonly> &#61
 	<input type="text" class="Value" id= "result" readonly>
 
-	<input type="button" class="button" value="Losuj" onclick= "random()">
+	<input type="button" class="button" value="Losuj" onclick= "random(); onClick()">
 
 </div>
 
@@ -82,16 +84,30 @@
 		if (x === "" , y === "") {
 			document.getElementById("result").value = "?";
 
+		if (x === 0 , y === 0) {
+			document.getElementById("result").value = 0;
+		}
+
 		}
 	}
 
 	function random() {
-		let x = document.getElementById("firstValue").value = Math.floor(Math.random() * 11);
-		let y = document.getElementById("secondValue").value = Math.floor(Math.random() * 11);
+		let x = document.getElementById("firstValue").value = Math.floor(Math.random() * 10);
+		let y = document.getElementById("secondValue").value = Math.floor(Math.random() * 10);
 		let z = x * y;
 		document.getElementById("result").value = z;
 
 	}
+
+	let counter = 0;
+
+	function onClick () {
+		counter += 1;
+		document.getElementById("number").innerHTML = counter;
+	
+	}
+
+	
 
 
 	</script>
