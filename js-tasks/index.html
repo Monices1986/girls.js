@@ -3,6 +3,9 @@
 <HTML>
 <HEAD>
 	<TITLE>FIRTS JS PAGE</TITLE>
+	
+	<meta charset="UTF-8">
+
 	<style type="text/css">
 
 	#header {
@@ -57,58 +60,60 @@
 
 </HEAD>
 
-<BODY onload = "random()">
+<BODY onload="random()">
 
-<p id="header">Pytanie: <a id="number">0</a></p>
+<p id="header">Pytanie: <a id="number">?</a></p>
 
 
 <div class="inputs">
 
 	<input type="number" class="Value" id ="firstValue" readonly>	&#215
 	<input type="number" class="Value" id = "secondValue" readonly> &#61
-	<input type="text" class="Value" id= "result" readonly>
+	<input type="text" class="Value" id= "result">
 
-	<input type="button" class="button" value="Losuj" onclick= "random(); onClick()">
+	<input type="button" class="button" value="Dalej" onclick= "next()">
 
 </div>
 
 
 	<script type="text/javascript">
 
-	function result () {
-		let x = document.getElementById("firstValue").value;
-		let y = document.getElementById("secondValue").value;
-		let z = x * y;
-		document.getElementById("result").value = z;
-
-		if (x === "" , y === "") {
-			document.getElementById("result").value = "?";
-
-		if (x === 0 , y === 0) {
-			document.getElementById("result").value = 0;
-		}
-
-		}
-	}
-
-	function random() {
-		let x = document.getElementById("firstValue").value = Math.floor(Math.random() * 10);
-		let y = document.getElementById("secondValue").value = Math.floor(Math.random() * 10);
-		let z = x * y;
-		document.getElementById("result").value = z;
-
-	}
-
 	let counter = 0;
 
-	function onClick () {
+	/* Funkcja random losuje dwie liczby i czyści pole odpowiedzi użytkownika. */
+	function random() {
+
+		console.log("wywołano funkcję random()")
+
+		// wylosujmy dwie liczby z zakresu <1..10>
+		let x = Math.floor(Math.random() * 10)+1;
+		let y = Math.floor(Math.random() * 10)+1;
+		
+		// ustawmy wartości pól <input> na wylosowane liczby
+		document.getElementById("firstValue").value = x;
+		document.getElementById("secondValue").value = y;
+
+		// wyczyśćmy pole odpowiedzi
+		document.getElementById("result").value = "";
+
 		counter += 1;
-		document.getElementById("number").innerHTML = counter;
-	
+		document.getElementById("number").innerText = counter;
+
 	}
 
-	
+	function next() {
+		let userAnswer = document.getElementById("result").value;
+		let x = document.getElementById("firstValue").value;
+		let y = document.getElementById("secondValue").value;
+		let correctAnswer = x * y;
 
+		console.log("user:", userAnswer, "correct:", correctAnswer);
+
+
+		if (userAnswer == correctAnswer) {
+			random(); 
+		}
+	}
 
 	</script>
 </BODY>
