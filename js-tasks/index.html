@@ -112,8 +112,13 @@
 
 		if (userAnswer == correctAnswer) {
 			random(); 
+			let audioTrue = new Audio('https://freesound.org/data/previews/204/204983_97763-lq.mp3');
+			audioTrue.play();
+			} else {
+				let audioFalse = new Audio('https://freesound.org/data/previews/394/394230_1847127-lq.mp3');
+				audioFalse.play();
+			}
 		}
-	}
 
 	</script>
 </BODY>
