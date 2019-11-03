@@ -71,7 +71,7 @@
 
 <BODY onload="random(); getFocus()">
 
-<form>
+<form onsubmit="next(); event.preventDefault()">
 
 <p id="header">Pytanie: <a id="number">?</a></p>
 
@@ -80,23 +80,25 @@
 
 	<input type="number" class="Value" id ="firstValue" readonly>	&#215
 	<input type="number" class="Value" id = "secondValue" readonly> &#61
-	<input type="text" class="Value" id= "result" onkeypress="return searchKeyPress(event);">
+	<input type="text" class="Value" id= "result">
 
-	<input type="button" class="button" value="Dalej" onclick= "next() ; wrongAnswer()">
+	<input type="submit" class="button" value="Dalej">
 
 </div>
 
 </form>
 
-<p class="stats">Poprawne odpowiedzi: <a id="correctAnswers"></a></p>
-<p class="stats">Błędy: <a id="wrongAnswers"></a></p>
-<p class="stats">Ocena: <a id="result"></a></p>
+<p class="stats">Poprawne odpowiedzi: <a id="correctAnswers">0</a></p>
+<p class="stats">Błędy: <a id="wrongAnswers">0</a></p>
+<p class="stats">Ocena: <a id="grade"></a></p>
 
 
 
 	<script type="text/javascript">
 
 	let counter = 0;
+	let invalid = 0;
+	let valid = 0;
 
 	/* Funkcja random losuje dwie liczby i czyści pole odpowiedzi użytkownika. */
 	function random() {
@@ -127,41 +129,38 @@
 
 		console.log("user:", userAnswer, "correct:", correctAnswer);
 
-		function wrongAnswer() {
-				document.getElementById("result").select();
-			}
+		getFocus();
 
+		if (userAnswer == "") {
+			return;
+		}
 
 		if (userAnswer == correctAnswer) {
 			random(); 
 			let audioTrue = new Audio('https://freesound.org/data/previews/204/204983_97763-lq.mp3');
 			audioTrue.play();
-			document.getElementById("correctAnswers").innerText = counter;
-			} else {
-				let audioFalse = new Audio('https://freesound.org/data/previews/394/394230_1847127-lq.mp3');
-				audioFalse.play();
-				wrongAnswer();
-			document.getElementById("wrongAnswers").innerText = counter;
-
-
-			}
-
+			valid++;
+		} else {
+			let audioFalse = new Audio('https://freesound.org/data/previews/394/394230_1847127-lq.mp3');
+			audioFalse.play();
+			invalid++;
 		}
+		showStats();
+	}
 
-		function getFocus() {
-			document.getElementById("result").focus();
-		}
+	function showStats() {
 
-		// function wrongAnswer() {
-		// let userAnswer = document.getElementById("result").value;
-		// let x = document.getElementById("firstValue").value;
-		// let y = document.getElementById("secondValue").value;
-		// let correctAnswer = x * y;
+		let grade = Math.round(valid / (valid + invalid) * 100);
 
+		document.getElementById("correctAnswers").innerHTML = valid;
+		document.getElementById("wrongAnswers").innerHTML = invalid;
+		document.getElementById("grade").innerHTML = grade + "%";
+	}
 
-
-		//}
-
+	function getFocus() {
+		document.getElementById("result").focus();
+		document.getElementById("result").select();
+	}
 
 
 	</script>
