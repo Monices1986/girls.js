@@ -123,11 +123,8 @@
 
 	function next() {
 		let userAnswer = document.getElementById("result").value;
-		let x = document.getElementById("firstValue").value;
-		let y = document.getElementById("secondValue").value;
-		let correctAnswer = x * y;
-
-		console.log("user:", userAnswer, "correct:", correctAnswer);
+		let x = parseInt(document.getElementById("firstValue").value);
+		let y = parseInt(document.getElementById("secondValue").value);
 
 		getFocus();
 
@@ -135,7 +132,7 @@
 			return;
 		}
 
-		if (userAnswer == correctAnswer) {
+		if (checkAnswer(x, y, userAnswer)) {
 			random(); 
 			let audioTrue = new Audio('https://freesound.org/data/previews/204/204983_97763-lq.mp3');
 			audioTrue.play();
@@ -160,6 +157,10 @@
 	function getFocus() {
 		document.getElementById("result").focus();
 		document.getElementById("result").select();
+	}
+
+	function checkAnswer(a, b, userAnswer) {
+		return (a * b == userAnswer);
 	}
 
 
