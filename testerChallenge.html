@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Document</title>
+        <style type="text/css">
+            body {
+                font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+            }
+            #squre {
+                background-color: red;
+                height: 200px;
+                width: 200px;
+                display: none;
+                position: relative;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>Test your reactions!</h1>
+        <p>CLick on the boxes as quickly as you can!</p>
+        <p>Your time: <span id="timeTaken"></span></p>
+        <div id="squre"></div>
+        <script type="text/javascript">
+        
+        let startTime = new Date().getTime();
+
+        function makeRandomColor() {
+            let letters = '0123456789ABCDEF'.split('');
+            let color = '#';
+            for (let i = 0; i < 6; i++) {
+                color += letters[Math.floor(Math.random()* 16 )];
+            }
+            return color;
+        }
+        function makeAppear() {
+            let top = Math.random() * 400;
+            let left = Math.random() * 400;
+            let width = (Math.random() * 200) + 100;
+            let height = Math.random() * 400;
+
+            if (Math.random() > 0.5) {
+                document.getElementById("squre").style.borderRadius = "50%"
+            } else {
+                document.getElementById("squre").style.borderRadius = "0";
+            }
+            document.getElementById("squre").style.backgroundColor = makeRandomColor();
+            document.getElementById("squre").style.top = top + "px";
+            document.getElementById("squre").style.left = left + "px";
+            document.getElementById("squre").style.display = "block";
+            document.getElementById("squre").style.width = width +"px";
+            document.getElementById("squre").style.height = height +"px";
+            startTime = new Date().getTime();
+        }
+        function appearAfterDelay() {
+            setTimeout(makeAppear, Math.random()* 2000);
+        }
+        appearAfterDelay();
+            document.getElementById("squre").onclick = function() {
+                document.getElementById("squre").style.display = "none";
+            
+                let endTime = new Date().getTime();
+                let timeTaken = (endTime - startTime)/1000;
+
+                document.getElementById("timeTaken").innerHTML = timeTaken + " s";
+                appearAfterDelay();
+            }
+        </script>
+        
+    </body>
+
+</html>
